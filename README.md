@@ -53,3 +53,8 @@ pip install -r requirements.txt
 
 # Run the application
 python app.py
+
+Authors-
+Nerelly Pooja
+Arigela Sreeja
+Neelam Thanvi Reddy
