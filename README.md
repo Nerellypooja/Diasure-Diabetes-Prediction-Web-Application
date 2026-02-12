@@ -55,8 +55,9 @@ pip install -r requirements.txt
 python app.py
 
 
-##Authors-
--Nerelly Pooja
--Arigela Sreeja
--Neelam Thanvi Reddy
+## Authors
+- Nerelly Pooja
+- Arigela Sreeja
+- Neelam Thanvi Reddy
+
 
