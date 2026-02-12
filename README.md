@@ -1,7 +1,6 @@
 Diasure – Diabetes Prediction Web Application
 
-Diasure is a web-based healthcare application designed to help users assess their diabetes risk and maintain healthier lifestyle habits.
-The platform combines machine learning prediction with interactive features like food preference tracking, mood logging, and an AI chatbot to provide a supportive and user-friendly health monitoring experience.
+
 
 The application aims to promote early awareness and encourage proactive health management through technology.
 
