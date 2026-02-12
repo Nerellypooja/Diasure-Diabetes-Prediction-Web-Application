@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
-from imblearn.over_sampling import SMOTE  # type: ignore # Handle imbalanced data
+from imblearn.over_sampling import SMOTE   # Handle imbalanced data
 
 # Step 1: Load Dataset
 df = pd.read_csv("diabetes.csv")

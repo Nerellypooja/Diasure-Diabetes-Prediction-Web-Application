@@ -10,12 +10,12 @@ from functools import wraps
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-load_dotenv()  # Add at the top
+load_dotenv() 
 
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'  # Replace with a secure key
+app.secret_key = 'your-secret-key'  
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -23,7 +23,6 @@ db.init_app(app)
 app.register_blueprint(auth)
 app.register_blueprint(checkup)
 
-# Custom login required decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -175,7 +174,7 @@ def dashboard():
 
         return jsonify(response_data)
 
-    # For GET requests, render the template without meal_plan
+  
     mood_message = session.pop('mood_message', None)
     pref = UserPreferences.query.filter_by(user_id=session['user_id']).first()
     allergy = pref.allergies if pref else ""
@@ -186,7 +185,7 @@ def dashboard():
                            wellness_tip=None,
                            pref_message=None,
                            selected_diet=selected_diet,
-                           meal_tip=None,  # Ensure meal_tip is None on page load
+                           meal_tip=None, 
                            selected_allergy=allergy,
                            predictions=[p.prediction for p in user.predictions] if user else [])
 
@@ -194,7 +193,7 @@ def dashboard():
 @login_required
 def download_history():
     user = db.session.get(User, session['user_id'])
-    print("User object:", user)  # Add this line to debug
+    print("User object:", user)  
     predictions = user.predictions
     html = render_template('history_pdf_template.html', predictions=predictions, user=user)
     pdf = BytesIO()
@@ -214,29 +213,36 @@ def chat():
         return jsonify({"reply": "Unable to process request."})
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel("gemini-2.5-flash")
         context = f"""
-        You are a diabetes-focused assistant. User details: 
+        You are a diabetes-focused assistant. User details:
         - Diet: {user.preferences.dietary_preference if user.preferences else 'unknown'}
         - Allergies: {user.preferences.allergies if user.preferences else 'none'}
         - Diabetes risk: {getattr(user, 'diabetes_risk', 'low')}
         - Mood: {EmotionLog.query.filter_by(user_id=session['user_id']).order_by(EmotionLog.timestamp.desc()).first().mood if EmotionLog.query.filter_by(user_id=session['user_id']).first() else 'unknown'}
-        Answer in 3-4 lines, focusing on diabetes, meals (low-GI), or exercise tailored to user data.
+        Answer in 3–4 lines, focusing on diabetes, meals (low-GI), or exercise tailored to user data.
         """
         prompt = f"{context}\nUser: {message}"
         response = model.generate_content(prompt)
-        reply = response.text.strip() if response.text else "Try again later."
+        reply = (
+            response.candidates[0].content.parts[0].text.strip()
+            if response and hasattr(response, "candidates")
+            else "Try again later."
+        )
+
     except Exception as e:
-        print(f"Gemini error: {str(e)}")
-        reply = "Error processing request."
+        import traceback
+        print("Gemini error:", str(e))
+        print(traceback.format_exc())
+        reply = f"Error processing request: {str(e)}"
 
     return jsonify({"reply": reply})
+
 
 @app.route('/checkup', methods=['GET', 'POST'])
 def checkup():
     return render_template("checkup.html")
 
-# Create tables
 with app.app_context():
     db.create_all()
 

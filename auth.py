@@ -7,7 +7,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']  # Add this line
+        username = request.form['username']  
         name = request.form['name']
         email = request.form['email']
         password = generate_password_hash(request.form['password'])
@@ -17,7 +17,7 @@ def signup():
             flash('Email already exists. Try logging in.', 'warning')
             return redirect('/login')
 
-        new_user = User(username=username, name=name, email=email, password=password)  # Add username here
+        new_user = User(username=username, name=name, email=email, password=password)  
         db.session.add(new_user)
         db.session.commit()
         flash('Successfully signed up! Please log in.', 'success')
