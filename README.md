@@ -4,7 +4,7 @@ Diasure – Diabetes Prediction Web Application
 
 The application aims to promote early awareness and encourage proactive health management through technology.
 
-🎯 Objective
+->Objective
 
 Predict diabetes risk using user health parameters
 
@@ -14,37 +14,37 @@ Provide interactive assistance through a chatbot
 
 Offer a centralized dashboard for monitoring user activity
 
-🚀 Key Features
+-> Key Features
 
-🧠 Diabetes Risk Prediction using Machine Learning
+ Diabetes Risk Prediction using Machine Learning
 
-📊 User Dashboard with navigation and monitoring tools
+ User Dashboard with navigation and monitoring tools
 
-🍽️ Food Preference Tracking for dietary habits
+ Food Preference Tracking for dietary habits
 
-😊 Mood Logging System to track emotional well-being
+ Mood Logging System to track emotional well-being
 
-🤖 Chatbot Integration for health guidance and interaction
+ Chatbot Integration for health guidance and interaction
 
-📜 Health History Tracking to store previous records
+ Health History Tracking to store previous records
 
-🔐 Secure Authentication System (Login / Logout)
+ Secure Authentication System (Login / Logout)
 
-🛠️ Technologies Used
+ Technologies Used
 
-Frontend
+->Frontend
 
 HTML, CSS, JavaScript
 
-Backend
+->Backend
 
 Python 
 
-Machine Learning
+->Machine Learning
 
 Random Forest, Scikit-learn, Pandas, NumPy, 
 
-Database
+->Database
 
 SQLAlchemy
 
